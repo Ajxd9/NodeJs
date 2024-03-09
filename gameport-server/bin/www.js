@@ -11,7 +11,7 @@ import chalk from "chalk";
  * Get port from environment and store in Express.
  */
 
-let port = normalizePort(process.env.PORT || "3030");
+let port = normalizePort(process.env.PORT || "3050");
 app.set("port", port);
 
 /**
