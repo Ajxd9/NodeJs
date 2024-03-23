@@ -6,6 +6,8 @@
 import app from "../app.js";
 import http from "http";
 import chalk from "chalk";
+import connectToDB from "../model/dbAdapter.js";
+import { initialUsers } from "../initialData/initalDataService.js";
 
 /**
  * Get port from environment and store in Express.
@@ -82,4 +84,7 @@ function onListening() {
   let addr = server.address();
   let bind = typeof addr === "string" ? addr : addr.port;
   console.log(chalk.green(`Listening on http://localhost:${bind}/`));
+  connectToDB().then(() => {
+    initialUsers();
+  });
 }

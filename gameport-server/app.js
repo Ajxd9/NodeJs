@@ -3,14 +3,15 @@ import path from "node:path";
 import cookieParser from "cookie-parser";
 import logger from "morgan";
 import * as url from "url";
-import chalk from "chalk";
+import cors from "cors";
+import loggerAdapter from "./loggers/loggerAdapter.js";
 import errorMiddleware from "./middlewares/error.mw.js";
-import apiRouter from "./routes/api.js";
+import apiRouter from "./routes/api.router.js";
 const __dirname = url.fileURLToPath(new URL(".", import.meta.url));
 
 let app = express();
-
-app.use(logger("dev"));
+app.use(cors());
+app.use(loggerAdapter());
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
