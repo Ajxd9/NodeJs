@@ -19,23 +19,11 @@ import { createGameValidation } from "../../validation/validationAdapter.js";
 const router = express.Router();
 
 router.get("/", getAllGamesController);
-router.get("/:gameId", (req, res) => {
-  res.send(`game with id ${req.params.gameId}`);
-});
-router.get("/games/my-games", (req, res) => {
-  res.send(`Games add to playlist by user`);
-});
-router.post("/games", (req, res) => {
-  console.log(req.body);
-  res.send(`game created`);
-});
-router.put("/games/:gameId", (req, res) => {
-  res.send(`game updated with id ${req.params.gameId}`);
-});
-router.patch("/games/:gameId", (req, res) => {
-  res.send(`game liked`);
-});
-router.delete("/games/:gameId", (req, res) => {
-  res.send(`game is deleted with id${req.params.gameId}`);
-});
+router.get("/:gameId", objectIdParamsValidationMiddleware,getGameByIdController);
+router.get("/my-games", getMyGamesController);
+router.post("/",bodyValidationMiddleware(createGameValidation), createGameController);
+router.put("/:gameId", bodyValidationMiddleware(createGameValidation),updateGameController);
+router.patch("/:gameId", patchLikeController);
+router.patch("/serial-number/:gameId", patchSerialNumberController);
+router.delete("/:gameId", deleteGameController);
 export default router;
