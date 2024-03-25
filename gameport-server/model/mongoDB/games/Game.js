@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-import Image from "../users/Image.js";
+import ImageSchema from "../helper/Image.js";
 import { DEFAULT_REQUIRED_STRING_VALIDATION } from "../helper/defaultStringValidation.helper.js";
 
 const GameSchema = new mongoose.Schema({
@@ -70,8 +70,8 @@ const GameSchema = new mongoose.Schema({
     type: String,
     default: null,
   },
-  image: Image,
-  screenshots: [Image],
+  coverImage: ImageSchema,
+  screenshots: [ImageSchema],
   likes: [String],
   createdAt: {
     type: Date,

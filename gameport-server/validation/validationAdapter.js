@@ -38,7 +38,6 @@ const objectIdValidation = (id) => {
   }
 };
 
-//ilan v
 const createGameValidation = (userInput) => {
   if (VALIDATION === "joi") {
     return createGameSchemaValidation(userInput);

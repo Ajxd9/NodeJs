@@ -1,9 +1,24 @@
 import express from "express";
+import {
+  createGameController,
+  deleteGameController,
+  getAllGamesController,
+  getGameByIdController,
+  getMyGamesController,
+  patchSerialNumberController,
+  patchLikeController,
+  updateGameController,
+} from "../../controllers/games.controller.js";
+import objectIdParamsValidationMiddleware from "../../middlewares/objectIdParamsValidation.mw.js";
+//import authMiddleware from "../../middlewares/auth.mw.js";
+//import isStreamerMiddleware from "../../middlewares/isStreamer.mw.js";
+import bodyValidationMiddleware from "../../middlewares/bodyValidation.mw.js";
+import { createGameValidation } from "../../validation/validationAdapter.js";
+//import adminOrBizMiddleware from "../../middlewares/adminOrBiz.mw.js";
+//import isAdminMiddleware from "../../middlewares/isAdmin.mw.js";
 const router = express.Router();
 
-router.get("/", (req, res) => {
-  res.json("all games");
-});
+router.get("/", getAllGamesController);
 router.get("/:gameId", (req, res) => {
   res.send(`game with id ${req.params.gameId}`);
 });
@@ -12,7 +27,7 @@ router.get("/games/my-games", (req, res) => {
 });
 router.post("/games", (req, res) => {
   console.log(req.body);
-  res.send(`card created`);
+  res.send(`game created`);
 });
 router.put("/games/:gameId", (req, res) => {
   res.send(`game updated with id ${req.params.gameId}`);

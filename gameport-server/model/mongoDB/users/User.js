@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 import Name from "./Name.js";
-import Image from "./Image.js";
+import ImageSchema from "../helper/Image.js";
 import Address from "./Address.js";
 import phoneRegex from "../../../utils/phoneRegex.js";
 import passwordRegex from "../../../utils/passwordRegex.js";
@@ -22,13 +22,10 @@ const UserSchema = new mongoose.Schema({
   password: {
     type: String,
     required: true,
-    // minLength: 7,
-    // maxLength: 20,
-    // match: RegExp(passwordRegex),
   },
-  image: Image,
+  image: ImageSchema,
   address: Address,
-  isBusiness: {
+  isStreamer: {
     type: Boolean,
     default: false,
   },

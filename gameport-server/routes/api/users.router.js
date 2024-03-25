@@ -1,6 +1,6 @@
 import express from "express";
 import {
-  loginController,
+  //loginController,
   registerController,
 } from "../../controllers/users.controller.js";
 import bodyValidationMiddleware from "../../middlewares/bodyValidation.mw.js";
@@ -16,8 +16,8 @@ router.get("/", (req, res) => {
 });
 router.post(
   "/login",
-  bodyValidationMiddleware(loginValidation),
-  loginController
+  bodyValidationMiddleware(loginValidation)
+  //loginController
 );
 router.post(
   "/register",

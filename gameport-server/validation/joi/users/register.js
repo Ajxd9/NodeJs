@@ -44,7 +44,8 @@ const registerSchema = Joi.object({
       zip: Joi.number().min(10000).max(9999999).required(),
     })
     .required(),
-  isBusiness: Joi.boolean().required(),
+  isStreamer: Joi.boolean().required(),
+  isAdmin: Joi.boolean().required(),
 });
 
 const registerSchemaValidation = (userInput) => {
