@@ -1,5 +1,5 @@
-import { createUser } from "../model/dbAdapter.js";
-import { createGame } from "../model/dbAdapter.js";
+import { createUser, createGame } from "../model/dbAdapter.js";
+import generateUniqueNumber from "../utils/generateUniqueNumber.js";
 
 const initialUsers = async () => {
   let users = [
@@ -83,7 +83,7 @@ const initialUsers = async () => {
   }
 };
 
-const initialGames = async () => {
+const initialGames = async (bizId) => {
   let games = [
     {
       title: "The Witcher 3: Wild Hunt",
@@ -125,6 +125,8 @@ const initialGames = async () => {
           alt: "image 3",
         },
       ],
+      serialNumber: await generateUniqueNumber(),
+      user_id: bizId,
     },
     {
       title: "Super Mario Odyssey",
@@ -161,6 +163,8 @@ const initialGames = async () => {
           alt: "image 3",
         },
       ],
+      serialNumber: await generateUniqueNumber(),
+      user_id: bizId,
     },
     {
       title: "Assassin's Creed Valhalla",
@@ -209,6 +213,8 @@ const initialGames = async () => {
           alt: "image 3",
         },
       ],
+      serialNumber: await generateUniqueNumber(),
+      user_id: bizId,
     },
     {
       title: "Minecraft",
@@ -252,6 +258,8 @@ const initialGames = async () => {
           alt: "image 3",
         },
       ],
+      serialNumber: await generateUniqueNumber(),
+      user_id: bizId,
     },
     {
       title: "Grand Theft Auto V",
@@ -301,6 +309,8 @@ const initialGames = async () => {
           alt: "image 3",
         },
       ],
+      serialNumber: await generateUniqueNumber(),
+      user_id: bizId,
     },
   ];
 

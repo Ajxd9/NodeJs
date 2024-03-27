@@ -70,12 +70,8 @@ For game-related actions:
 
 ### Postman Documentation
 
-<details>
-<summary>Expand for Postman Documentation</summary>
-
-Add links to Postman documentation here.
-
-</details>
+- [Games Documintation](https://documenter.getpostman.com/view/31306818/2sA35EZhZ5)
+- [Users Documintation](https://documenter.getpostman.com/view/31306818/2sA35EZhZ7)
 
 ## Routes
 
@@ -100,16 +96,11 @@ Add links to Postman documentation here.
 | --- | ---------------------- | ------ | --------------------- | ------------------ | --------------------- |
 | 1   | /games                 | GET    | all                   | All games          | Attachment 2          |
 | 2   | /games/my-games        | GET    | registered user       | User's games       | Array of user's games |
-| 3   | /games/:id             | GET    | all                   | Get game           | Game                  |
+| 3   | /games/:gameId         | GET    | all                   | Get game           | Game                  |
 | 4   | /games                 | POST   | Streamer user         | Create new game    | Game                  |
-| 5   | /games/:id             | PUT    | Creator user          | Edit game          | Updated game          |
-| 6   | /games/:id             | PATCH  | Registered user       | Like game          | Updated game          |
-| 7   | /games/:id             | DELETE | Creator user or admin | Delete game        | Deleted game          |
+| 5   | /games/:gameId         | PUT    | Creator user          | Edit game          | Updated game          |
+| 6   | /games/:gameId         | PATCH  | Registered user       | Like game          | Updated game          |
+| 7   | /games/:gameId         | DELETE | Creator user or admin | Delete game        | Deleted game          |
 | 8   | /serial-number/:gameId | PATCH  | Admin                 | Edit Serial Number | Updated game          |
 
 </details>
-
-## License
-
-[License Name]
-Copyright Abed Jbareen

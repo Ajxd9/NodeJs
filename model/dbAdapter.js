@@ -5,6 +5,8 @@ import {
   getUserByEmailMongo,
   patchIsStreamerMongo,
   updateUserMongo,
+  getAllUsersMongo,
+  getUserByIdMongo,
 } from "./mongodb/users/userService.js";
 import {
   createGameMongo,
@@ -23,6 +25,16 @@ const DB = "mongo";
 const connectToDB = () => {
   if (DB === "mongo") {
     return connectToMongo();
+  }
+};
+const getAllUsers = () => {
+  if (DB === "mongo") {
+    return getAllUsersMongo();
+  }
+};
+const getUserById = () => {
+  if (DB === "mongo") {
+    return getUserByIdMongo();
   }
 };
 const createUser = (user) => {
@@ -120,4 +132,6 @@ export {
   updateGame,
   updateLikeGame,
   deleteGame,
+  getAllUsers,
+  getUserById,
 };

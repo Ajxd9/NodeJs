@@ -5,24 +5,29 @@ import {
   registerController,
   updateUserController,
   patchIsStreamerController,
+  getAllUsersController,
+  getUserByIdController,
 } from "../../controllers/users.controller.js";
 import bodyValidationMiddleware from "../../middlewares/bodyValidation.mw.js";
 import {
   loginValidation,
   registerValidation,
   editUserValidation,
-  patchSchemaValidation,
 } from "../../validation/validationAdapter.js";
 import authMiddleware from "../../middlewares/auth.mw.js";
 import adminOrOwn from "../../middlewares/adminOrOwn.mw.js";
 import objectIdParamsValidationMiddleware from "../../middlewares/objectIdParamsValidation.mw.js";
+import isAdminMiddleware from "../../middlewares/isAdmin.mw.js";
 const router = express.Router();
 
 // http://localhost:3030/api/users
-router.get("/", (req, res) => {
-  res.json("users sub route");
-});
-
+router.get("/", authMiddleware, isAdminMiddleware, getAllUsersController);
+router.get(
+  "/:id",
+  authMiddleware,
+  objectIdParamsValidationMiddleware,
+  getUserByIdController
+);
 router.post(
   "/register",
   bodyValidationMiddleware(registerValidation),

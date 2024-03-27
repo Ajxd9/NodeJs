@@ -1,3 +1,4 @@
+import generateUniqueNumber from "../utils/generateUniqueNumber.js";
 const normalizeGame = async (game) => {
   let coverImage;
 
@@ -25,7 +26,7 @@ const normalizeGame = async (game) => {
       price: game.price || 0,
       coverImage,
       screenshots: game.screenshots || [],
-      serialNumber: game.serialNumber || undefined, //This Number is only added for the Node project should be removed for the final Project
+      serialNumber: game.serialNumber || (await generateUniqueNumber()),
     };
   } catch (err) {
     return Promise.reject(err);

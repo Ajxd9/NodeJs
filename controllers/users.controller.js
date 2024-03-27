@@ -4,11 +4,29 @@ import {
   updateUser,
   deleteUser,
   patchIsStreamer,
+  getAllUsers,
+  getUserById,
 } from "../model/dbAdapter.js";
 import handleError from "../utils/handleError.js";
 import { generateHash, cmpHash } from "../utils/bcrypt.js";
 import { generateToken } from "../token/jwt.js";
 
+const getAllUsersController = async (req, res) => {
+  try {
+    let users = await getAllUsers();
+    res.json(users);
+  } catch (err) {
+    console.log(err);
+  }
+};
+const getUserByIdController = async (req, res) => {
+  try {
+    let user = await getUserById();
+    res.json(user);
+  } catch (err) {
+    console.log(err);
+  }
+};
 const registerController = async (req, res) => {
   try {
     let userFromDB = await getUserByEmail(req.body.email);
@@ -85,4 +103,6 @@ export {
   updateUserController,
   deleteUserController,
   patchIsStreamerController,
+  getAllUsersController,
+  getUserByIdController,
 };

@@ -20,14 +20,25 @@ const gameSchema = Joi.object({
   onlinePlay: Joi.boolean().when("multiplayer", {
     is: true,
     then: Joi.boolean().required(),
+    otherwise: Joi.boolean().forbidden(),
   }),
   offlinePlay: Joi.boolean().required(),
   singlePlayer: Joi.boolean().required(),
   ageRating: Joi.string().min(2).max(10).required(),
   price: Joi.number().min(0),
   website: Joi.string().uri(),
-  coverImage: Joi.string().uri(),
-  screenshots: Joi.array().items(Joi.string().uri()),
+  coverImage: Joi.object({
+    url: Joi.string().uri().required(),
+    alt: Joi.string().required(),
+  }).required(),
+  screenshots: Joi.array()
+    .items(
+      Joi.object({
+        url: Joi.string().uri().required(),
+        alt: Joi.string().required(),
+      })
+    )
+    .required(),
 });
 
 const gameValidation = (gameInput) => {

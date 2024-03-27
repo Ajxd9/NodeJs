@@ -73,6 +73,16 @@ const GameSchema = new mongoose.Schema({
   coverImage: ImageSchema,
   screenshots: [ImageSchema],
   likes: [String],
+
+  serialNumber: {
+    type: Number,
+    minLength: 7,
+    maxLength: 7,
+    required: true,
+  },
+  user_id: {
+    type: mongoose.Schema.Types.ObjectId,
+  },
   createdAt: {
     type: Date,
     default: Date.now,
