@@ -37,6 +37,9 @@ Add links to Postman documentation here.
 
 ### Users
 
+<details>
+<summary>Expand for Postman Documentation</summary>
+
 | No. | URL          | Method | Authorization | Action             | Notice        | Return         |
 | --- | ------------ | ------ | ------------- | ------------------ | ------------- | -------------- |
 | 1   | /users       | POST   | all           | Register user      | Encrypt token | Array of users |
@@ -59,6 +62,7 @@ Add links to Postman documentation here.
 | 6   | /games/:id      | PATCH  |               | Update game     |                       |
 | 7   | /games/:id      | DELETE |               | Delete game     |                       |
 
+</details>
 ## License
 
 [License Name]
