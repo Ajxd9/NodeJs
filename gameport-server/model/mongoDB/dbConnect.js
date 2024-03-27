@@ -3,7 +3,7 @@ import chalk from "chalk";
 const connectToMongo = () => {
   return new Promise((resolve, reject) => {
     mongoose
-      .connect("mongodb://localhost:27017/")
+      .connect(process.env.MONGODB_CON_STR + "Gameport")
       .then(() => {
         console.log(chalk.magenta("Connected to MongoDB"));
         resolve();

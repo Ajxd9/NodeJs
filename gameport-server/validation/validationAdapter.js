@@ -3,6 +3,7 @@ import loginSchemaValidation from "./joi/users/login.js";
 import editUserSchemaValidation from "./joi/users/editUser.js";
 import validateObjectIdSchema from "./joi/objectId.js";
 import createGameSchemaValidation from "./joi/games/game.validation.js";
+import patchValidation from "./joi/users/patch.validation.js";
 
 const VALIDATION = "joi";
 
@@ -45,11 +46,18 @@ const createGameValidation = (userInput) => {
     throw new Error(`Validation ${VALIDATION} is not supported`);
   }
 };
-
+const patchSchemaValidation = (userInput) => {
+  if (VALIDATION === "joi") {
+    return patchValidation(userInput);
+  } else {
+    throw new Error(`Validation ${VALIDATION} is not supported`);
+  }
+};
 export {
   registerValidation,
   loginValidation,
   editUserValidation,
   objectIdValidation,
   createGameValidation,
+  patchSchemaValidation,
 };

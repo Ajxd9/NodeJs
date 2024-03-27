@@ -7,7 +7,7 @@ import {
 } from "../model/dbAdapter.js";
 import handleError from "../utils/handleError.js";
 import { generateHash, cmpHash } from "../utils/bcrypt.js";
-//import { generateToken } from "../token/jwt.js";
+import { generateToken } from "../token/jwt.js";
 
 const registerController = async (req, res) => {
   try {
@@ -26,7 +26,7 @@ const registerController = async (req, res) => {
   }
 };
 
-/*const loginController = async (req, res) => {
+const loginController = async (req, res) => {
   try {
     let userFromDB = await getUserByEmail(req.body.email);
     if (!userFromDB) throw new Error("invalid email or password");
@@ -35,26 +35,19 @@ const registerController = async (req, res) => {
     let token = await generateToken({
       _id: userFromDB._id,
       isAdmin: userFromDB.isAdmin,
-      isBusiness: userFromDB.isBusiness,
+      isStreamer: userFromDB.isStreamer,
     });
     res.json(token);
   } catch (err) {
     console.log(err);
     handleError(res, 400, err.message);
   }
-};*/
+};
 
 const updateUserController = async (req, res) => {
-  /**
-   * validation | mw, joi
-   * update user:
-   * if(user is admin) then update user
-   * if user is not admin then if user._id === payload(token)._id then update user
-   * response user
-   */
   try {
-    // if (!req.userData.isAdmin && req.userData._id !== req.params.id)
-    //   throw new Error("you not allowed to update");
+    if (!req.userData.isAdmin && req.userData._id !== req.params.id)
+      throw new Error("you not allowed to update");
     let userFromDB = await updateUser(req.params.id, req.body);
     userFromDB.password = undefined;
     res.json(userFromDB);
@@ -66,7 +59,7 @@ const updateUserController = async (req, res) => {
 
 const patchIsStreamerController = async (req, res) => {
   try {
-    let userFromDB = await patchIsStreamer(req.params.id, req.body.isBusiness);
+    let userFromDB = await patchIsStreamer(req.params.id, req.body.isStreamer);
     userFromDB.password = undefined;
     res.json(userFromDB);
   } catch (err) {
@@ -87,7 +80,7 @@ const deleteUserController = async (req, res) => {
 };
 
 export {
-  //loginController,
+  loginController,
   registerController,
   updateUserController,
   deleteUserController,

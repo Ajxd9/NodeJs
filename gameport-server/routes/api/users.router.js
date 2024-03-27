@@ -1,46 +1,63 @@
 import express from "express";
 import {
-  //loginController,
+  deleteUserController,
+  loginController,
   registerController,
+  updateUserController,
+  patchIsStreamerController,
 } from "../../controllers/users.controller.js";
 import bodyValidationMiddleware from "../../middlewares/bodyValidation.mw.js";
 import {
-  registerValidation,
   loginValidation,
+  registerValidation,
   editUserValidation,
+  patchSchemaValidation,
 } from "../../validation/validationAdapter.js";
+import authMiddleware from "../../middlewares/auth.mw.js";
+import adminOrOwn from "../../middlewares/adminOrOwn.mw.js";
+import objectIdParamsValidationMiddleware from "../../middlewares/objectIdParamsValidation.mw.js";
 const router = express.Router();
 
+// http://localhost:3030/api/users
 router.get("/", (req, res) => {
   res.json("users sub route");
 });
-router.post(
-  "/login",
-  bodyValidationMiddleware(loginValidation)
-  //loginController
-);
+
 router.post(
   "/register",
   bodyValidationMiddleware(registerValidation),
   registerController
 );
-router.get("/users/:userId", (req, res) => {
-  res.send(`get user with id ${req.params.id}`);
-});
-router.post("/users", (req, res) => {
-  res.send(`get All users`);
-});
-router.put(
-  "/users/:userId",
-  bodyValidationMiddleware(editUserValidation),
-  (req, res) => {
-    res.send(`user updated with id ${req.params.gameId}`);
-  }
+
+router.post(
+  "/login",
+  bodyValidationMiddleware(loginValidation),
+  loginController
 );
-router.patch("/users/:userId", (req, res) => {
-  res.send(`changed status`);
-});
-router.delete("/users/:userId", (req, res) => {
-  res.send(`user with id is deleted ${req.params.userId}`);
-});
+
+router.put(
+  "/:id",
+  authMiddleware,
+  objectIdParamsValidationMiddleware,
+  adminOrOwn,
+  bodyValidationMiddleware(editUserValidation),
+  updateUserController
+);
+
+router.patch(
+  "/:id",
+  authMiddleware,
+  objectIdParamsValidationMiddleware,
+  adminOrOwn,
+  patchIsStreamerController
+);
+
+router.delete(
+  "/:id",
+  authMiddleware,
+  objectIdParamsValidationMiddleware,
+  adminOrOwn,
+  deleteUserController
+);
+
 export default router;

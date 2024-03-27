@@ -3,6 +3,8 @@
 /**
  * Module dependencies.
  */
+import env from "dotenv";
+env.config();
 import app from "../app.js";
 import http from "http";
 import chalk from "chalk";

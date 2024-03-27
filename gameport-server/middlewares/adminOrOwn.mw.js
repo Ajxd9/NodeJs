@@ -8,7 +8,7 @@ const adminOrOwn = (req, res, next) => {
   if (req.userData.isAdmin || req.userData._id === req.params.id) {
     next();
   } else {
-    handleError(res, 401, "you not allowed to do this action");
+    handleError(res, 401, "you are not allowed to do this action");
   }
 };
 export default adminOrOwn;

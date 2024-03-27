@@ -3,7 +3,7 @@ import ImageSchema from "../helper/Image.js";
 import { DEFAULT_REQUIRED_STRING_VALIDATION } from "../helper/defaultStringValidation.helper.js";
 
 const GameSchema = new mongoose.Schema({
-  title: DEFAULT_REQUIRED_STRING_VALIDATION,
+  title: { ...DEFAULT_REQUIRED_STRING_VALIDATION, unique: true },
   description: {
     ...DEFAULT_REQUIRED_STRING_VALIDATION,
     maxLength: 1024,
