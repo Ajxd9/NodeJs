@@ -21,7 +21,7 @@ const getAllUsersController = async (req, res) => {
 };
 const getUserByIdController = async (req, res) => {
   try {
-    let user = await getUserById();
+    let user = await getUserById(req.params.id);
     res.json(user);
   } catch (err) {
     console.log(err);

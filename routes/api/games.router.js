@@ -19,8 +19,9 @@ import isAdminMiddleware from "../../middlewares/isAdmin.mw.js";
 const router = express.Router();
 
 router.get("/", getAllGamesController);
-router.get("/:id", objectIdParamsValidationMiddleware, getGameByIdController);
 router.get("/my-games", authMiddleware, getMyGamesController);
+router.get("/:id", objectIdParamsValidationMiddleware, getGameByIdController);
+
 router.post(
   "/",
   authMiddleware,

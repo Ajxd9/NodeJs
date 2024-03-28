@@ -32,9 +32,9 @@ const getAllUsers = () => {
     return getAllUsersMongo();
   }
 };
-const getUserById = () => {
+const getUserById = (id) => {
   if (DB === "mongo") {
-    return getUserByIdMongo();
+    return getUserByIdMongo(id);
   }
 };
 const createUser = (user) => {
@@ -68,7 +68,6 @@ const patchIsStreamer = (id, isStreamer) => {
     return patchIsStreamerMongo(id, isStreamer);
   }
 };
-
 //---------games---------
 const createGame = async (game) => {
   game = await normalizeGame(game);
