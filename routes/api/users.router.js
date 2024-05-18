@@ -1,4 +1,5 @@
 import express from "express";
+import upload from "../../middlewares/uploadImage.mw.js";
 import {
   deleteUserController,
   loginController,
@@ -30,6 +31,7 @@ router.get(
 );
 router.post(
   "/register",
+  upload.single("picture"),
   bodyValidationMiddleware(registerValidation),
   registerController
 );

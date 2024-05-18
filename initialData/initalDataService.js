@@ -11,9 +11,7 @@ const initialUsers = async () => {
       phone: "0500000000",
       email: "kenny@gmail.com",
       password: "$2a$10$Tq3AH1Z0uEHo7MKbqMaUPOufejlQ8j8/Qs1Pne9YeKcyqOQVX28NK",
-      image: {
-        alt: "http://www.google.com",
-      },
+      picturePath: "public/images/pfp1.jpg",
       address: {
         country: "asd",
         city: "asd",
@@ -32,9 +30,7 @@ const initialUsers = async () => {
       phone: "0500000000",
       email: "john@gmail.com",
       password: "$2a$10$Tq3AH1Z0uEHo7MKbqMaUPOufejlQ8j8/Qs1Pne9YeKcyqOQVX28NK",
-      image: {
-        alt: "http://www.google.com",
-      },
+      picturePath: "public/images/pfp1.jpg",
       address: {
         country: "asd",
         city: "asd",
@@ -53,9 +49,7 @@ const initialUsers = async () => {
       phone: "0500000000",
       email: "james@gmail.com",
       password: "$2a$10$Tq3AH1Z0uEHo7MKbqMaUPOufejlQ8j8/Qs1Pne9YeKcyqOQVX28NK",
-      image: {
-        alt: "http://www.google.com",
-      },
+      picturePath: "public/images/pfp1.jpg",
       address: {
         country: "asd",
         city: "asd",
@@ -74,7 +68,7 @@ const initialUsers = async () => {
       if (!user.isAdmin && user.isBusiness) {
         bizId = userFromDb._id;
       }
-      // console.log("userFromDb", userFromDb);
+      console.log("userFromDb", userFromDb);
     }
     return bizId;
   } catch (err) {
