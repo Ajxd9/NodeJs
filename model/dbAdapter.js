@@ -7,6 +7,8 @@ import {
   updateUserMongo,
   getAllUsersMongo,
   getUserByIdMongo,
+  getUserFriendsMongo,
+  addRemoveFriendMongo,
 } from "./mongodb/users/userService.js";
 import {
   createGameMongo,
@@ -68,6 +70,16 @@ const patchIsStreamer = (id, isStreamer) => {
     return patchIsStreamerMongo(id, isStreamer);
   }
 };
+const getUserFriends =(id)=>{
+  if (DB === "mongo") {
+    return getUserFriendsMongo(id);
+    }
+}
+const addRemoveFriend =(id,friendID)=>{
+  if (DB === "mongo") {
+    return addRemoveFriendMongo(id,friendID);
+  }
+}
 //---------games---------
 const createGame = async (game) => {
   game = await normalizeGame(game);
@@ -133,4 +145,6 @@ export {
   deleteGame,
   getAllUsers,
   getUserById,
+  getUserFriends,
+  addRemoveFriend,
 };

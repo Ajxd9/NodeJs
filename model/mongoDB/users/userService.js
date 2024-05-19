@@ -27,7 +27,12 @@ const patchIsStreamerMongo = (id, isStreamer) => {
 const deleteUserMongo = (id) => {
   return User.findByIdAndDelete(id);
 };
-
+const getUserFriendsMongo =(id)=>{
+  return User.findById(id).populate('friends');
+}
+const addRemoveFriendMongo =(id,friendID)=>{
+  return User.findByIdAndUpdate(id,{$push:{friends:friendID}},{new:true});
+}
 export {
   createUserMongo,
   getAllUsersMongo,
@@ -36,4 +41,6 @@ export {
   updateUserMongo,
   deleteUserMongo,
   patchIsStreamerMongo,
+  getUserFriendsMongo,
+  addRemoveFriendMongo
 };

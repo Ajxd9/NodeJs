@@ -8,6 +8,8 @@ import {
   patchIsStreamerController,
   getAllUsersController,
   getUserByIdController,
+  getUserFriends,
+  addRemoveFriend,
 } from "../../controllers/users.controller.js";
 import bodyValidationMiddleware from "../../middlewares/bodyValidation.mw.js";
 import {
@@ -66,5 +68,6 @@ router.delete(
   adminOrOwn,
   deleteUserController
 );
-
+router.get("/:id/friends",authMiddleware,getUserFriends);
+router.patch(":id/:friendID",authMiddleware,addRemoveFriend);
 export default router;
