@@ -99,53 +99,54 @@ const deleteUserController = async (req, res) => {
     handleError(res, 400, err.message);
   }
 };
-const getUserFriendsController= async(req,res)=>{
-  
-  try{
+const getUserFriendsController = async (req, res) => {
+  try {
     const { id } = req.params;
-    const user =getUserById(id);
+    const user = getUserById(id);
     userFromDB.password = undefined;
     const friends = await Promise.all(
-      user.friends.map((id)=> User.findById(id))
+      user.friends.map((id) => User.findById(id))
     );
     const formattedFriends = friends.map(
-      ({_id,firstName,lastName,occupation,location,picturePath})=>{
-        return {_id,firstName,lastName,occupation,location,picturePath};
-      });
-      res.status(200).json(formattedFriends);
-  }catch(err){
+      ({ _id, firstName, lastName, occupation, location, picturePath }) => {
+        return { _id, firstName, lastName, occupation, location, picturePath };
+      }
+    );
+    res.status(200).json(formattedFriends);
+  } catch (err) {
     console.log(err);
-    handleError(res,400,err.message);
+    handleError(res, 400, err.message);
   }
 };
-const addRemoveFriendsController= async(req,res)=>{
-  try{
-    const { id,friendId } = req.params;
-    const user =getUserById(id);
+const addRemoveFriendController = async (req, res) => {
+  try {
+    const { id, friendId } = req.params;
+    const user = getUserById(id);
     userFromDB.password = undefined;
-    const friend=getUserById(friendId);
-    if(user.friends.includes(friendId)){
-      user.friend = user.friends.filter((id)=>id !==friendId);
-      friend.friends=friend.friends.filter((id)=>id !==id);
-    }else{
+    const friend = getUserById(friendId);
+    if (user.friends.includes(friendId)) {
+      user.friend = user.friends.filter((id) => id !== friendId);
+      friend.friends = friend.friends.filter((id) => id !== id);
+    } else {
       user.friends.push(friendId);
       friend.friends.push(id);
     }
     await user.save();
     await friend.save();
     const friends = await Promise.all(
-      user.friends.map((id)=> User.findById(id))
+      user.friends.map((id) => User.findById(id))
     );
     const formattedFriends = friends.map(
-      ({_id,firstName,lastName,occupation,location,picturePath})=>{
-        return {_id,firstName,lastName,occupation,location,picturePath};
-      });
-      res.status(200).json(formattedFriends);
-  }catch(err){
+      ({ _id, firstName, lastName, occupation, location, picturePath }) => {
+        return { _id, firstName, lastName, occupation, location, picturePath };
+      }
+    );
+    res.status(200).json(formattedFriends);
+  } catch (err) {
     console.log(err);
-    handleError(res,400,err.message);
+    handleError(res, 400, err.message);
   }
-}
+};
 export {
   loginController,
   registerController,
@@ -155,5 +156,5 @@ export {
   getAllUsersController,
   getUserByIdController,
   getUserFriendsController,
-  addRemoveFriendsController,
+  addRemoveFriendController,
 };
